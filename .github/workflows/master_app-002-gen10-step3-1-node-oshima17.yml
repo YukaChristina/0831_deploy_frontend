@@ -35,19 +35,13 @@ jobs:
       #2
       - name: Copy artifact for deployment job
         run: |
-          echo "Creating deploy directory..."
-          mkdir -p deploy/.next
-          echo "Copying .next content..."
-          cp -rv .next/* deploy/.next/
-          echo "Copying package.json..."
-          cp -v package.json deploy/
+          mkdir deploy
+          cp -r ./.next/standalone/. ./deploy
+          cp -r ./.next/static/. ./deploy/.next/static
 
       - name: Zip artifact for deployment
         run: zip release.zip ./deploy -r #3
-      - name: List contents of the zip
-        run: |
-          echo "Listing zip contents..."
-          unzip -l release.zip
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -65,7 +59,7 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip -o release.zip -d deploy
+        run: unzip -o release.zip
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
