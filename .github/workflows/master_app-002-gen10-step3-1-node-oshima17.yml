@@ -35,14 +35,19 @@ jobs:
       #2
       - name: Copy artifact for deployment job
         run: |
+          echo "Creating deploy directory..."
           mkdir -p deploy/.next
-          cp -r .next/standalone deploy/
-          cp -r .next/static deploy/.next/
-          cp package.json deploy/
+          echo "Copying .next content..."
+          cp -rv .next/* deploy/.next/
+          echo "Copying package.json..."
+          cp -v package.json deploy/
 
       - name: Zip artifact for deployment
         run: zip release.zip ./deploy -r #3
-
+      - name: List contents of the zip
+        run: |
+          echo "Listing zip contents..."
+          unzip -l deploy.zip
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
