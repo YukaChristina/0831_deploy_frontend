@@ -67,5 +67,5 @@ jobs:
         with:
           app-name: 'app-002-gen10-step3-1-node-oshima17'
           slot-name: 'Production'
-          package: ./deploy #4
+          package: ./deploy/.next/standalone #4
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6A95AE1A55004DD19C91D6D9BA7B98BD }}
