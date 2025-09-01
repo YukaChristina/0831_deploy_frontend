@@ -47,7 +47,7 @@ jobs:
       - name: List contents of the zip
         run: |
           echo "Listing zip contents..."
-          unzip -l deploy.zip
+          unzip -l release.zip
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
